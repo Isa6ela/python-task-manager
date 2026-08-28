@@ -26,23 +26,34 @@ while True:
             if task == "q":
                 break
             number = len(tasks_list)+1
-            tasks_list[number] = task
+
+            task_data = {
+                "task": task,
+                "completed": False
+            }
+
+            tasks_list[number] = task_data
+
 
     #SHOW TASKS
     elif choice == 2:
         for num, task in tasks_list.items():
-            print(f"{num}.[ ] {task}")
+            if task["completed"]:
+                print(f"{num}. [x] {task['task']}")
+            else:
+                print(f"{num}. [ ] {task['task']}")
+
 
     #COMPLETE TASK
-    # elif choice == 3:
-    #         while True:
-    #             completed_task = input("Enter number of your completed task: ")
-    #             print("press q to exit")
-    #             if completed_task == "q":
-    #                 break
-    #             elif completed_task in tasks_list:
-
-
+    elif choice == 3:
+            while True:
+                completed_task = input("Enter task number to complete: ")
+                print("press q to exit")
+                if completed_task == "q":
+                    break
+                completed_task = int(completed_task)
+                if completed_task in tasks_list:
+                    tasks_list[completed_task]["completed"] = True
 
 
     #DELETE TASK
