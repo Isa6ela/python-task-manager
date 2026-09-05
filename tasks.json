@@ -1,0 +1,13 @@
+{
+    "tasks": {
+        "1": {
+            "task": "shopping",
+            "completed": false
+        },
+        "3": {
+            "task": "cooking",
+            "completed": false
+        }
+    },
+    "next_id": 4
+}

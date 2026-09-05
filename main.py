@@ -1,3 +1,7 @@
+from storage import *
+
+
+
 # TASK MANAGER MENU
 
 def menu():
@@ -11,7 +15,9 @@ def menu():
     """)
 
 # TASKS LIST
-tasks_list = {}
+data = open_tasks()
+tasks_list = data["tasks"]
+next_id= data["next_id"]
 
 # MENU CHOICE
 while True:
@@ -34,15 +40,17 @@ while True:
             if task == "":
                 print("Invalid task. Try again. \n" )
                 continue
-            number = len(tasks_list)+1
 
             task_data = {
                 "task": task,
                 "completed": False
             }
 
-            tasks_list[number] = task_data
-
+            tasks_list[next_id] = task_data
+            next_id+=1
+            data["tasks"] = tasks_list
+            data["next_id"] = next_id
+            write_tasks(data)
 
     # SHOW TASKS
     elif choice == 2:
@@ -64,6 +72,7 @@ while True:
                     completed_task = int(completed_task)
                     if completed_task in tasks_list:
                         tasks_list[completed_task]["completed"] = True
+                        write_tasks(data)
                     else:
                         print("Invalid number. Try again. \n" )
                 else:
@@ -79,13 +88,7 @@ while True:
             continue
         if delete_task in tasks_list:
             del tasks_list[delete_task]
-
-            new_tasks_list = {}
-            for new_number, task in enumerate(tasks_list.values(), start = 1):
-                new_tasks_list[new_number] = task
-
-            tasks_list = new_tasks_list
-
+            write_tasks(data)
             print("Task deleted")
 
         else:
