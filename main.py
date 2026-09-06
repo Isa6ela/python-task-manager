@@ -1,9 +1,7 @@
 from storage import *
 
 
-
 # TASK MANAGER MENU
-
 def menu():
     print("=== TASK MANAGER ===")
     print("""
@@ -93,8 +91,6 @@ while True:
 
         else:
             print("Invalid number. Try again. \n" )
-
-
 
 
     # EXIT THE PROGRAM
