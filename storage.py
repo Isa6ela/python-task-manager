@@ -1,8 +1,16 @@
 import json
+from task import Task
 
 #write tasks
 def write_tasks(data):
     with open("tasks.json", "w") as file:
+        new_data = []
+        for task in data["tasks"]:
+            new_task = {"id": task.id, "task": task.task, "completed": task.completed}
+            new_data.append(new_task)
+
+        data = {"tasks": new_data, "next_id": data["next_id"]}
+
         json.dump(data, file, indent=4)
 
 
@@ -12,13 +20,12 @@ def open_tasks():
         try:
             data = json.load(file)
         except json.decoder.JSONDecodeError:
-            data = {"tasks": {},"next_id": 1}
+            data = {"tasks": [], "next_id": 1}
 
-    #key conversion to int
-    new_data = {}
-    for id, task in data["tasks"].items():
-        new_data[int(id)] = task
+    new_data = []
+    for task in data["tasks"]:
+        new_task = Task(task["id"], task["task"], task["completed"])
+        new_data.append(new_task)
 
     data["tasks"] = new_data
-
     return data

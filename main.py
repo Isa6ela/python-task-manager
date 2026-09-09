@@ -1,4 +1,13 @@
 from storage import *
+from task_manager import TaskManager
+
+data = open_tasks()
+manager = TaskManager()
+manager.tasks = data["tasks"]
+manager.next_id = data["next_id"]
+manager.delete_task(1)
+print(manager.tasks)
+print(len(manager.tasks))
 
 
 # TASK MANAGER MENU
