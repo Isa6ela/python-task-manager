@@ -18,7 +18,10 @@ class TaskManager:
 
     def complete_task(self, id):
         task = self.find_task(id)
-        task.completed = True
+        if task == None:
+            print("Task not found")
+        else:
+            task.completed = True
 
     def delete_task(self,id):
         task = self.find_task(id)
