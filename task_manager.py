@@ -25,4 +25,7 @@ class TaskManager:
 
     def delete_task(self,id):
         task = self.find_task(id)
-        self.tasks.remove(task)
+        if task == None:
+            print("Task not found")
+        else:
+            self.tasks.remove(task)
